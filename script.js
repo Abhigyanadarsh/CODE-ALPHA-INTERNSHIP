@@ -1,56 +1,59 @@
-let display = document.getElementById('display');
-let currentInput = '';
-let operator = '';
-let operand1 = '';
-let operand2 = '';
+const audio = document.getElementById('audio');
+const playPauseBtn = document.getElementById('play-pause');
+const songTitle = document.getElementById('song-title');
+const artistName = document.getElementById('artist-name');
 
-function clearDisplay() {
-    currentInput = '';
-    operator = '';
-    operand1 = '';
-    operand2 = '';
-    display.textContent = '0';
-}
-
-function deleteLast() {
-    currentInput = currentInput.slice(0, -1);
-    display.textContent = currentInput || '0';
-}
-
-function appendNumber(number) {
-    currentInput += number;
-    display.textContent = currentInput;
-}
-
-function appendOperator(op) {
-    if (currentInput === '') return;
-    if (operator) calculate();
-    operand1 = currentInput;
-    operator = op;
-    currentInput = '';
-}
-
-function calculate() {
-    if (currentInput === '' || !operator) return;
-    operand2 = currentInput;
-    let result;
-    switch (operator) {
-        case '+':
-            result = parseFloat(operand1) + parseFloat(operand2);
-            break;
-        case '-':
-            result = parseFloat(operand1) - parseFloat(operand2);
-            break;
-        case '*':
-            result = parseFloat(operand1) * parseFloat(operand2);
-            break;
-        case '/':
-            result = parseFloat(operand1) / parseFloat(operand2);
-            break;
+const songs = [
+    {
+        title: "Shree Hanuman Chalisa",
+        artist: "Artist 1",
+        src: "Shree_Hanuman_Chalisa.mp3"
+    },
+    {
+        title: "Jai_Hanuman_Gosai",
+        artist: "Artist 2",
+        src: "Jai_Hanuman_Gosai.mp3"
+    },
+    {
+        title: "Sankat_Mochan_Naam_Tiharo",
+        artist: "Artist 3",
+        src: "Sankat_Mochan_Naam_Tiharo.mp3"
     }
-    display.textContent = result;
-    currentInput = result.toString();
-    operator = '';
-    operand1 = '';
-    operand2 = '';
+];
+
+let currentSongIndex = 0;
+
+function loadSong(song) {
+    songTitle.textContent = song.title;
+    artistName.textContent = song.artist;
+    audio.src = song.src;
 }
+
+function togglePlayPause() {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = 'Pause';
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = 'Play';
+    }
+}
+
+function prevSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    loadSong(songs[currentSongIndex]);
+    if (!audio.paused) {
+        audio.play();
+    }
+}
+
+function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    loadSong(songs[currentSongIndex]);
+    if (!audio.paused) {
+        audio.play();
+    }
+}
+
+// Load the initial song
+loadSong(songs[currentSongIndex]);
