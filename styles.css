@@ -1,43 +1,59 @@
 body {
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
 }
 
-.music-player {
+.calculator {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 300px;
-    width: 100%;
 }
 
-.song-info {
-    margin-bottom: 20px;
-}
-
-.controls button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
+.display {
+    font-size: 2em;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: right;
+    background-color: #e6e6e6;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    font-size: 1.5em;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
     cursor: pointer;
-    font-size: 16px;
     transition: background-color 0.3s;
 }
 
-.controls button:hover {
-    background-color: #45a049;
+button:hover {
+    background-color: #e6e6e6;
 }
 
-.controls button:focus {
-    outline: none;
+.zero {
+    grid-column: span 2;
+}
+
+.equals {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.equals:hover {
+    background-color: #45a049;
 }
